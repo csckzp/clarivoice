@@ -1,0 +1,364 @@
+:root {
+  --bg: #0c0c1a;
+  --surface: #161625;
+  --surface-2: #1e1e35;
+  --border: #2a2a4a;
+  --accent: #7c3aed;
+  --accent-hover: #6d28d9;
+  --success: #10b981;
+  --error: #ef4444;
+  --text-primary: #e8e8f5;
+  --text-secondary: #7878aa;
+  --text-muted: #4a4a6a;
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 24px 40px;
+}
+
+/* ── Header ── */
+.header {
+  text-align: center;
+  margin-bottom: 44px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.logo-wave {
+  font-size: 30px;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.logo-text {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.tagline {
+  color: var(--text-secondary);
+  font-size: 15px;
+}
+
+/* ── Main container ── */
+.main {
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Backend status banner ── */
+.status-banner {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  text-align: center;
+}
+
+/* ── Drop zone ── */
+.dropzone {
+  background: var(--surface);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 64px 32px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  transition: border-color 0.18s, background 0.18s;
+}
+
+.dropzone:hover,
+.dropzone.dragging {
+  border-color: var(--accent);
+  background: rgba(124, 58, 237, 0.07);
+}
+
+.dropzone-icon {
+  font-size: 48px;
+  margin-bottom: 18px;
+}
+
+.dropzone-primary {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.dropzone-secondary {
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.dropzone-formats {
+  color: var(--text-muted);
+  font-size: 12px;
+  letter-spacing: 0.6px;
+}
+
+/* ── File ready state ── */
+.file-ready {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.file-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.file-icon {
+  font-size: 26px;
+  flex-shrink: 0;
+}
+
+.file-info {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+}
+
+.file-name {
+  font-weight: 500;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 0;
+  transition: color 0.15s;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: transparent;
+}
+
+.btn-link:hover {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+
+/* ── Format toggle ── */
+.format-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2px;
+}
+
+.format-label {
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.format-toggle {
+  display: flex;
+  gap: 3px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 3px;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  padding: 5px 16px;
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.toggle-btn.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* ── Process button ── */
+.btn-process {
+  width: 100%;
+  padding: 15px;
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.1px;
+  transition: background 0.15s, transform 0.1s, opacity 0.15s;
+}
+
+.btn-process:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.btn-process:active:not(:disabled) {
+  transform: scale(0.99);
+}
+
+.btn-process:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ── Processing state ── */
+.processing {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  text-align: center;
+}
+
+.processing-file {
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.progress-track {
+  width: 100%;
+  height: 6px;
+  background: var(--surface-2);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent) 0%, #a855f7 100%);
+  border-radius: 99px;
+  transition: width 0.4s ease;
+}
+
+.processing-msg {
+  color: var(--text-primary);
+  font-size: 14px;
+  min-height: 20px;
+}
+
+.processing-pct {
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Complete state ── */
+.complete {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 44px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  text-align: center;
+}
+
+.complete-check {
+  width: 56px;
+  height: 56px;
+  background: rgba(16, 185, 129, 0.12);
+  border: 2px solid var(--success);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: var(--success);
+  flex-shrink: 0;
+}
+
+.complete-title {
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.audio-player {
+  width: 100%;
+  accent-color: var(--accent);
+  border-radius: 6px;
+}
+
+.btn-download {
+  display: inline-block;
+  padding: 13px 32px;
+  background: var(--success);
+  color: #fff;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  transition: opacity 0.15s;
+}
+
+.btn-download:hover {
+  opacity: 0.88;
+}
+
+/* ── Error state ── */
+.error-section {
+  background: var(--surface);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  border-radius: var(--radius);
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.error-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--error);
+}
+
+.error-msg {
+  color: var(--text-secondary);
+  font-size: 13px;
+  max-width: 420px;
+  word-break: break-word;
+}
