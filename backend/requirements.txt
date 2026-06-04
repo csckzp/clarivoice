@@ -1,6 +1,20 @@
+# NOTE: torch and torchaudio must be installed from the CUDA index to enable GPU
+# acceleration (the default pip wheel is CPU-only). setup_windows.bat handles
+# this automatically. For manual setup use:
+#   pip install "torch==2.2.2+cu118" "torchaudio==2.2.2+cu118" --index-url https://download.pytorch.org/whl/cu118
+# IMPORTANT: PyTorch 2.5+ CUDA wheels on Windows require the CUDA Toolkit installed
+# separately (for nvrtc DLLs). 2.2.2+cu118 bundles all required DLLs in the wheel.
 fastapi==0.115.5
 uvicorn[standard]==0.32.1
 demucs==4.0.1
 pydub==0.25.1
 soundfile==0.12.1
 numpy==1.26.4
+matplotlib
+accelerate
+# Optional — neural speech bandwidth extension (Pass 3, --superres flag):
+# audiosr 0.0.7 has broken pins on Python 3.12 — install in this order:
+#   1. python.exe -m pip install audiosr --no-deps
+#   2. python.exe -m pip install "torchvision==0.17.2+cu118" --index-url https://download.pytorch.org/whl/cu118
+#   3. python.exe -m pip install chardet ftfy unidecode progressbar pandas scipy timm torchlibrosa "librosa>=0.9.2" phonemizer "tokenizers>=0.19,<0.20" "transformers==4.44.2"
+# (~1 GB model weights downloaded on first run; GPU strongly recommended)

@@ -30,9 +30,27 @@ def denoise(input_path: str, job_id: str, progress_cb: Callable[[int, str], None
 
     progress_cb(20, "Pass 1: Loading audio...")
 
-    # Use soundfile directly — avoids torchaudio backend issues in v2.11+
-    data, sr = sf.read(input_path, always_2d=True)  # [samples, channels]
-    wav = torch.from_numpy(data.T).float()           # [channels, samples]
+    # soundfile cannot read MP3/AAC/OGG etc. — decode to PCM WAV via ffmpeg first
+    # so all container formats work and the MPEG-header warnings are avoided.
+    import subprocess
+    decoded_wav = str(output_dir / "_input_decoded.wav")
+    decode = subprocess.run(
+        [
+            "ffmpeg", "-y",
+            "-i", input_path,
+            "-ar", "44100",
+            "-ac", "2",
+            "-c:a", "pcm_s16le",
+            decoded_wav,
+        ],
+        capture_output=True,
+        text=True,
+    )
+    if decode.returncode != 0:
+        raise RuntimeError(f"FFmpeg could not decode input:\n{decode.stderr[-600:]}")
+
+    data, sr = sf.read(decoded_wav, always_2d=True)  # [samples, channels]
+    wav = torch.from_numpy(data.T).float()            # [channels, samples]
 
     # Resample to model's expected rate (44100 Hz)
     if sr != model.samplerate:
